@@ -11,14 +11,10 @@ jobs:
       matrix:
         runner-platform:
           - ubuntu-latest
-          - buildjet-4vcpu-ubuntu-2204-arm
         include:
           - runner-platform: ubuntu-latest
             build-arch: linux/amd64
             tagged-platform: amd64
-          - runner-platform: buildjet-4vcpu-ubuntu-2204-arm
-            build-arch: linux/arm64
-            tagged-platform: arm64
     runs-on: ${{ matrix.runner-platform }}
     steps:
       - name: Set up Buildx
@@ -82,7 +78,7 @@ jobs:
           docker_image: ghcr.io/sonroyaalmerol/muse
 
       - name: Combine tags
-        run: docker buildx imagetools create $(echo '${{ steps.get-tags.outputs.tag }}' | tr "," "\0" | xargs -0 printf -- '-t %s ') 'ghcr.io/sonroyaalmerol/muse:${{ github.sha }}-arm64' 'ghcr.io/sonroyaalmerol/muse:${{ github.sha }}-amd64'
+        run: docker buildx imagetools create $(echo '${{ steps.get-tags.outputs.tag }}' | tr "," "\0" | xargs -0 printf -- '-t %s ') 'ghcr.io/sonroyaalmerol/muse:${{ github.sha }}-amd64'
 
   release:
     name: Create GitHub release
