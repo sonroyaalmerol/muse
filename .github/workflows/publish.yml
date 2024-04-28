@@ -50,7 +50,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/codetheweb/muse:${{ github.sha }}-${{ matrix.tagged-platform }}
+          tags: ghcr.io/sonroyaalmerol/muse:${{ github.sha }}-${{ matrix.tagged-platform }}
           platforms: ${{ matrix.build-arch }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache,mode=min
@@ -79,10 +79,10 @@ jobs:
         id: get-tags
         uses: Surgo/docker-smart-tag-action@v1
         with:
-          docker_image: ghcr.io/codetheweb/muse
+          docker_image: ghcr.io/sonroyaalmerol/muse
 
       - name: Combine tags
-        run: docker buildx imagetools create $(echo '${{ steps.get-tags.outputs.tag }}' | tr "," "\0" | xargs -0 printf -- '-t %s ') 'ghcr.io/codetheweb/muse:${{ github.sha }}-arm64' 'ghcr.io/codetheweb/muse:${{ github.sha }}-amd64'
+        run: docker buildx imagetools create $(echo '${{ steps.get-tags.outputs.tag }}' | tr "," "\0" | xargs -0 printf -- '-t %s ') 'ghcr.io/sonroyaalmerol/muse:${{ github.sha }}-arm64' 'ghcr.io/sonroyaalmerol/muse:${{ github.sha }}-amd64'
 
   release:
     name: Create GitHub release
