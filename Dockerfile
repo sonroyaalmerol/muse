@@ -8,6 +8,7 @@ RUN apt-get update \
     ffmpeg \
     tini \
     openssl \
+    git \
     ca-certificates \
     && apt-get autoclean \
     && apt-get autoremove \
