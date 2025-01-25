@@ -6,7 +6,7 @@ on:
     - 'v*'
 
 env:
-  REGISTRY_IMAGE: ghcr.io/museofficial/muse
+  REGISTRY_IMAGE: ghcr.io/sonroyaalmerol/muse
 
 jobs:
   publish:
@@ -14,14 +14,10 @@ jobs:
       matrix:
         runner-platform:
           - ubuntu-latest
-          - namespace-profile-default-arm64
         include:
           - runner-platform: ubuntu-latest
             build-arch: linux/amd64
             tagged-platform: amd64
-          - runner-platform: namespace-profile-default-arm64
-            build-arch: linux/arm64
-            tagged-platform: arm64
     runs-on: ${{ matrix.runner-platform }}
     permissions:
       contents: read
